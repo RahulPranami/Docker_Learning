@@ -64,3 +64,94 @@ docker logs -f --since 0 container_id
 # to start in attached mode
 docker start -a container_id
 ```
+
+- to remove containers
+  ```bash
+  docker rm container_id
+  ```
+- to remove all stopped containers
+  ```bash
+    docker container prune
+  ```
+- to remove all containers
+  ```bash
+    docker rm -f $(docker ps -aq)
+  ```
+- to remove images
+  ```bash
+    docker rmi image_id
+  ```
+- to remove all images
+  ```bash
+    docker rmi $(docker images -q)
+  ```
+- to remove all images and containers
+  ```bash
+    docker system prune
+  ```
+- to remove all images and containers and volumes
+  ```bash
+    docker system prune -a
+  ```
+- to remove all images and containers and volumes and networks
+
+  ```bash
+    docker system prune -a --volumes
+  ```
+
+- to automatically remove the container after it exits
+
+  ```bash
+  docker run --rm -p 80:80 docker_id
+  ```
+
+- to get information about the container
+
+  ```bash
+  docker inspect container_id
+  ```
+
+- to get information about the image
+
+  ```bash
+  docker image inspect image_id
+  ```
+
+- to copy files into and from a container
+
+  ```bash
+  docker cp container_id:/path/to/file /path/to/destination
+  docker cp /path/to/file container_id:/path/to/destination
+  ```
+
+## names and tags for images and containers
+
+- to give a name to the container
+
+  ```bash
+      docker run --name container_name -p 80:80 docker_id
+  ```
+
+- to give a name to the image
+
+  ```bash
+    docker build -t image_name .
+  ```
+
+- to give a tag to the image
+
+  ```bash
+    docker build -t image_name:tag_name .
+  ```
+
+- to give a tag to the image
+  ```bash
+  docker build -t image_name:tag_name .
+  ```
+
+### Example
+
+```bash
+docker build -t node:latest .
+docker run -p 80:80 -d --rm --name nodeApp node:latest
+```
