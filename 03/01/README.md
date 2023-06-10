@@ -64,3 +64,53 @@
     ```bash
     docker run -d -p 80:80 --rm --name feedback-app -v feedback:/app/feedback -v "$(pwd):/app" -v /app/node_modules feedback-node:volumes
     ```
+
+## Read Only Volumes
+
+- to create a read only volume
+
+  ```bash
+    docker run -d -p 80:80 --rm --name feedback-app -v feedback:/app/feedback -v "$(pwd):/app:ro" -v /app/node_modules -v /app/temp feedback-node:volumes
+  ```
+
+# Arguments And Environment Variables
+
+## Environment Variables
+
+- building image
+
+  ```bash
+    docker build -t feedback-node:env .
+  ```
+
+- run container
+
+  ```bash
+    docker run -d -p 80:80 --rm --name feedback-app -v feedback:/app/feedback -v "$(pwd):/app:ro" -v /app/node_modules -v /app/temp feedback-node:env
+  ```
+
+- passing port number dynamically using --env flag
+
+  ```bash
+    docker run -d -p 80:3000 --rm --name feedback-app -v feedback:/app/feedback -v "$(pwd):/app:ro" -v /app/node_modules -v /app/temp --env PORT=3000 feedback-node:env
+  ```
+
+- using env file
+
+  ```bash
+    docker run -d -p 80:3000 --rm --name feedback-app -v feedback:/app/feedback -v "$(pwd):/app:ro" -v /app/node_modules -v /app/temp --env-file ./.env feedback-node:env
+  ```
+
+## build time arguments
+
+- build image
+
+  ```bash
+    docker build -t feedback-node:build-arg .
+  ```
+
+- build image using build args
+
+  ```bash
+    docker build -t feedback-node:build-arg --build-arg DEFAULT_PORT=3000 .
+  ```
