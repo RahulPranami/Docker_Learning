@@ -30,3 +30,9 @@
   ```bash
     docker volume ls
   ```
+
+- passing volumes to the container
+
+  ```bash
+    docker run -p 80:80 --rm --name feedback-app -v feedback:/app/feedback feedback-node:volumes
+  ```
